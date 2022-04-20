@@ -3,6 +3,7 @@
 
 <html>
 <head>
+<%System.out.println("===========addPurchaseView.jsp½ÃÀÛ==========="); %>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
@@ -227,7 +228,8 @@ function fncAddPurchase() {
 
 </body>
 </html>
-		
+
+<%System.out.println("===========addPurchaseView.jsp ³¡==========="); %>
 		
 							
 					

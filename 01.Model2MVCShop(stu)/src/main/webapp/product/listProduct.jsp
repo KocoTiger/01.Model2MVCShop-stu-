@@ -186,7 +186,7 @@ function fncGetProductList(){
 				<% 	if(menu.equals("search")){%>
 				
 					<a href="/getProduct.do?prodNo=<%=vo.getProdNo() %>"><%= vo.getProdName() %></a>
-					
+					<!-- ?로가는 것이 get방식이다 => link이동 key value값으로 request에 싣어서 보내는것 -->
 				<%} else{%>
 				
 					<a href="/updateProductView.do?prodNo=<%=vo.getProdNo() %>"><%= vo.getProdName() %></a>

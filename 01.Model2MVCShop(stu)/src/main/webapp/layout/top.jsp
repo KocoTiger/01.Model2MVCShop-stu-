@@ -29,6 +29,7 @@
 	          <%
 	          	if(vo == null) {
 	          %>
+	          <!-- 세션에 유저 정보가 없을시 로그인(/user/loginView.jsp) 이동 -->
 	              <a href="/user/loginView.jsp" target="rightFrame">login</a>   
 	          <%
 	          	}
@@ -39,6 +40,7 @@
 	          <%
 	          	if(vo != null) {
 	          %>
+	          <!-- 세션에 유저 정보가 있다면 logout버튼("/logout.do") 활성화 -->
 	            <a href="/logout.do" target="_parent">logout</a>  
 	           <%
 	          	}

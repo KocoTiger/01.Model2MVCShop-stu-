@@ -44,10 +44,14 @@ public class ProductDAO {
 		stmt.setInt(1, prodNo);
 
 		ResultSet rs = stmt.executeQuery();
-
-		Product productVO = null;
+		
+		
+		Product	productVO = new Product();
+//		Product productVO = null;
+		//Product productVO = null; 이것은 아래의 값을 세팅하기위해 공간을 만든 개념이다
 		while (rs.next()) {
-			productVO = new Product();
+//			Product	productVO = new Product();
+			//rs는 내가 위에 코드를 돌려서 얻은 값이 담겨 있다.그래서 그 값들을 아래에서 get~으로 추출하는 것
 			productVO.setProdNo(rs.getInt("PROD_NO"));
 			productVO.setProdName(rs.getString("PROD_NAME"));
 			productVO.setProdDetail(rs.getString("PROD_DETAIL"));

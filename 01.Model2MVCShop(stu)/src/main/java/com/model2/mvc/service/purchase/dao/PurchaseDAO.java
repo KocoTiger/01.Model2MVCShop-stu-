@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 import com.model2.mvc.common.SearchVO;
 import com.model2.mvc.common.util.DBUtil;
-import com.model2.mvc.service.product.vo.Product;
 import com.model2.mvc.service.product.vo.Purchase;
+import com.model2.mvc.service.purchase.vo.PurchaseVO;
 
 public class PurchaseDAO {
 	
@@ -18,7 +18,7 @@ public class PurchaseDAO {
 	}
 	
 	//M
-	public void insertPurchase(Purchase purchaseVO) throws Exception {
+	public void insertPurchase(PurchaseVO purchaseVO) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 
@@ -35,40 +35,40 @@ public class PurchaseDAO {
 		con.close();
 	}
 
-	public Purchase findPurchase(Product purchaseProd) throws Exception {
+	public PurchaseVO findPurchase(PurchaseVO purchaseVO) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 
-		String sql = "SELECT * FROM transaction WHERE PROD_NO=? " ;
+		String sql = "SELECT * FROM transaction WHERE buyer_id=? " ;
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setInt(1, purchaseProd);
 
 		ResultSet rs = stmt.executeQuery();
 
-		Purchase productVO = null;
+		PurchaseVO purchaseVO = null;
 		while (rs.next()) {
-			productVO = new Purchase();
-			productVO.setProdNo(rs.getInt("PROD_NO"));
-			productVO.setProdName(rs.getString("PROD_NAME"));
-			productVO.setProdDetail(rs.getString("PROD_DETAIL"));
-			productVO.setManuDate(rs.getString("MANUFACTURE_DAY"));
-			productVO.setPrice(rs.getInt("PRICE"));
-			productVO.setFileName(rs.getString("IMAGE_FILE"));
-			productVO.setRegDate(rs.getDate("REG_DATE"));
+			purchaseVO = new PurchaseVO();
+			purchaseVO.setProdNo(rs.getInt("PROD_NO"));
+			purchaseVO.setProdName(rs.getString("PROD_NAME"));
+			purchaseVO.setProdDetail(rs.getString("PROD_DETAIL"));
+			purchaseVO.setManuDate(rs.getString("MANUFACTURE_DAY"));
+			purchaseVO.setPrice(rs.getInt("PRICE"));
+			purchaseVO.setFileName(rs.getString("IMAGE_FILE"));
+			purchaseVO.setRegDate(rs.getDate("REG_DATE"));
 
 		}
 		
 		con.close();
 
-		return productVO;
+		return purchaseVO;
 	}
 
-	public HashMap<String,Object> getProductList(SearchVO searchVO) throws Exception {
+	public HashMap<String,Object> getPurchaseList(SearchVO searchVO) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "SELECT * FROM product ";
+		String sql = "SELECT * FROM transaction ";
 		if (searchVO.getSearchCondition() != null) {
 			if (searchVO.getSearchCondition().equals("0")) {
 				sql += "WHERE PROD_NO='" + searchVO.getSearchKeyword()
@@ -98,10 +98,10 @@ public class PurchaseDAO {
 		System.out.println("searchVO.getPage():" + searchVO.getPage());
 		System.out.println("searchVO.getPageUnit():" + searchVO.getPageUnit());
 
-		ArrayList<Purchase> list = new ArrayList<Purchase>();
+		ArrayList<PurchaseVO> list = new ArrayList<PurchaseVO>();
 		if (total > 0) {
 			for (int i = 0; i < searchVO.getPageUnit(); i++) {
-				Purchase vo = new Purchase();
+				PurchaseVO vo = new PurchaseVO();
 				vo.setProdNo(rs.getInt("PROD_NO"));
 				vo.setProdName(rs.getString("PROD_NAME"));
 				vo.setProdDetail(rs.getString("PROD_DETAIL"));
@@ -124,19 +124,19 @@ public class PurchaseDAO {
 		return map;
 	}
 
-	public void updateProduct(Purchase productVO) throws Exception {
+	public void updatePurchase(PurchaseVO purchaseVO) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 
-		String sql = "UPDATE product SET PROD_NAME=?,PROD_DETAIL=?,MANUFACTURE_DAY=?,PRICE=?,IMAGE_FILE=? WHERE PROD_NO=? " ;
+		String sql = "UPDATE transaction SET PROD_NAME=?,PROD_DETAIL=?,MANUFACTURE_DAY=?,PRICE=?,IMAGE_FILE=? WHERE PROD_NO=? " ;
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
-		stmt.setString(1, productVO.getProdName());
-		stmt.setString(2, productVO.getProdDetail());
-		stmt.setString(3, productVO.getManuDate());
-		stmt.setInt(4, productVO.getPrice());
-		stmt.setString(5, productVO.getFileName());
-		stmt.setInt(6, productVO.getProdNo());
+		stmt.setString(1, purchaseVO.getProdName());
+		stmt.setString(2, purchaseVO.getProdDetail());
+		stmt.setString(3, purchaseVO.getManuDate());
+		stmt.setInt(4, purchaseVO.getPrice());
+		stmt.setString(5, purchaseVO.getFileName());
+		stmt.setInt(6, purchaseVO.getProdNo());
 		
 		
 		stmt.executeUpdate();

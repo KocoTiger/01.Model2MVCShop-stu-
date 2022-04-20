@@ -8,17 +8,21 @@ import com.model2.mvc.service.user.vo.UserVO;
 
 public class PurchaseVO {
 	
-	private UserVO buyer;			//UserVo타입의 구매자 정보
+	private Product purchaseProd;	//ProductVO타입의 구매물품 정보
+	private UserVO buyer;			//UserVo타입의 구매자 정보 // 
+	/* UserVO = (UserVO)session.getAttribute("user");
+	 * => 로그인한 정보가 이렇게 하면 세팅이 된다.
+	 */
 	private String divyAddr;		//String 타입의 배송지 주소
 	private String divyDate;		//String 타입의 배송희망 일자
 	private String divyRequest;		//String 타입의 배송시 요구사항
 	private Date orderDate;			//java.sql.Date타입의 구매 일자
 	private String paymentOption;	//String 타입의 지불방식
-	private Product purchaseProd;	//ProductVO타입의 구매물품 정보
+	
 	private String receiverName;	//String타입의 받는 사람 이름
 	private String receiverPhone;	//String 타입의 받는사람 전화번호
 	private String tranCode;		//String타입의 구매 상태 코드
-	private int tranNo;				//int타입의 구매 번호 => prodNo같은 거네
+	private int tranNo;				//int타입의 구매 번호 => prodNo같은 거네 ===> seq로 자동으로 매겨지는 번호
 	
 	public PurchaseVO(){
 	}

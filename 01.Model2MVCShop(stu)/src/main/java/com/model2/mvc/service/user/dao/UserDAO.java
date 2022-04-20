@@ -94,10 +94,15 @@ public class UserDAO {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("count", new Integer(total));
 
+		
+		
+		//페이지 관한 작업
 		rs.absolute(searchVO.getPage() * searchVO.getPageUnit() - searchVO.getPageUnit()+1);
 		System.out.println("searchVO.getPage():" + searchVO.getPage());
 		System.out.println("searchVO.getPageUnit():" + searchVO.getPageUnit());
 
+		
+		
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		if (total > 0) {
 			for (int i = 0; i < searchVO.getPageUnit(); i++) {
@@ -119,6 +124,9 @@ public class UserDAO {
 		}
 		System.out.println("list.size() : "+ list.size());
 		map.put("list", list);
+		//유저 리스트
+		//유저 total 에다가 map은 put으로 넣어줌
+		
 		System.out.println("map().size() : "+ map.size());
 
 		con.close();

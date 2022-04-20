@@ -52,7 +52,9 @@ function resetData(){
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm"  method="post" enctype="multipart/form-data">
+
+<!-- 아래 내용 deialForm 맨끝에 파일 업로드시 enctype="multipart/form-data"를 널어줘 -->
+<form name="detailForm"  method="post" >
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -125,7 +127,10 @@ function resetData(){
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+	
+	<!-- tr 가로줄을 만듬 / table row의 약자 -->
 	<tr>
+	<!-- td 셀을 만드는 역할 / table data의 약자 -->
 		<td width="104" class="ct_write">
 		가격 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 		</td>
@@ -136,6 +141,8 @@ function resetData(){
 
 		</td>
 	</tr>
+	
+	
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
@@ -143,10 +150,14 @@ function resetData(){
 		<td width="104" class="ct_write">상품이미지</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input		type="file" name="fileName" class="ct_input_g" 
+					
+					<!-- 아래의 type을 파일 업로드시 file로 바꿔줘 -->
+			<input		type="text" name="fileName" class="ct_input_g" 
 							style="width: 200px; height: 19px" maxLength="13"/>
 		</td>
 	</tr>
+	
+	
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>

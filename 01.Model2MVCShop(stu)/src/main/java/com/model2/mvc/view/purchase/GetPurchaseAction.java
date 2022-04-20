@@ -1,4 +1,4 @@
-package com.model2.mvc.view.product;
+package com.model2.mvc.view.purchase;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -8,28 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model2.mvc.framework.Action;
-import com.model2.mvc.service.product.ProductService;
-import com.model2.mvc.service.product.impl.ProductServiceImpl;
-import com.model2.mvc.service.product.vo.Product;
+import com.model2.mvc.service.purchase.PurchaseService;
+import com.model2.mvc.service.purchase.vo.PurchaseVO;
 
-public class GetProductAction extends Action {
+public class GetPurchaseAction extends Action {
 	
 	@Override
 	public String execute(	HttpServletRequest request,
 												HttpServletResponse response) throws Exception {
-		//request안에서는 항상 STring 상태이기떄문에 이경우 형변환이 필요
-		int prodNo = (Integer.parseInt(request.getParameter("prodNo")));
 		
-		//Product vo = service.getProduct(prodNo); 여기 작업 DAO => DB => 다시 Impl => Action
-		ProductService service = new ProductServiceImpl();
+		int purchaseProd = (Integer.parseInt(request.getParameter("purchaseProd")));
 		
-		//vo 에 정제된 데이터를 넣음
-		Product vo = service.getProduct(prodNo);
+		PurchaseService service = new PurchaseServiceImpl();
+		PurchaseVO vo = service.getPurchase(purchaseProd);
 		
-		//request에다가 정제된 vo를 넣는다 (resqueset Session에 저장 한다는 개념)
 		request.setAttribute("vo", vo);
 
-		
 		//Cookie
 		String history;
 	    Cookie cookie = null;
@@ -45,14 +39,14 @@ public class GetProductAction extends Action {
 	            if (cookie.getName().equals("history")) {
 	               
 	               history = URLDecoder.decode(cookie.getValue(),"euc-kr");
-	               history +=","+vo.getProdNo();
+	               history +=","+vo.getPurchaseProd();
 	               System.out.println(history);
 	               
 	               cookie = new Cookie("history",URLEncoder.encode(history,"euc-kr"));
 	               
 	            }else {
 	            	
-	               cookie = new Cookie("history", Integer.toString(prodNo));
+	               cookie = new Cookie("history", Integer.toString(purchaseProd));
 	            
 	            }//end of else	            
 	         }//end of for
@@ -64,6 +58,6 @@ public class GetProductAction extends Action {
 
 		
 		
-		return "forward:/product/getProduct.jsp";
+		return "forward:/purchase/getPurchase.jsp";
 	}
 }
